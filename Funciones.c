@@ -6,6 +6,8 @@
 #define true 1
 #define DATO_INVALIDO -1
 
+static int isLetras(char*pBuffer);
+
 static int getString(char* pBuffer, int limite);
 
 static int getString(char* pBuffer, int limite)
@@ -332,3 +334,40 @@ void insertion(int data[],int len)
         data[j+1]=temp;
     }
 }
+
+int utn_getLetras(char *pBuffer,int limite,int reintentos,char* msj,char*msjError){
+    int retorno=-1;
+    char buffer[limite];
+    if(pBuffer!=NULL && limite >0 && reintentos >=0){
+        do{
+            reintentos--;
+            printf("\n%s",msj);
+            if(getString(buffer,limite)==0 && isLetras(buffer)==0){
+                strncpy(pBuffer,buffer,limite);
+                retorno=0;
+                break;
+            }else
+                printf("\n%s",msjError);
+        }while(reintentos>=0);
+    }
+    return retorno;
+}
+static int isLetras(char*pBuffer)
+{
+    int retorno=-1;
+    int i=0;
+    if(pBuffer!=NULL){
+        do{
+            if((*(pBuffer+i)<65||*(pBuffer+i)>90) && (*(pBuffer+i)<97||*(pBuffer+i)>122)){
+                break;
+            }
+            i++;
+        }while(i<strlen(pBuffer));
+        if(i==strlen(pBuffer)){
+            retorno=0;
+        }
+    }
+    return retorno;
+
+
+    }
