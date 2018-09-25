@@ -6,6 +6,8 @@
 #define true 1
 #define DATO_INVALIDO -1
 
+static int verificarMail(char *arreglo);
+
 static int isLetras(char*pBuffer);
 
 static int getString(char* pBuffer, int limite);
@@ -371,3 +373,51 @@ static int isLetras(char*pBuffer)
 
 
     }
+
+int utn_getMail(char *pBuffer,int limite,int reintentos,char* msj,char*msjError){
+    int retorno=-1;
+    char buffer[limite];
+    if(pBuffer!=NULL && limite >0 && reintentos >=0){
+        do{
+            reintentos--;
+            printf("\n%s",msj);
+            if(getString(buffer,limite)==0 && verificarMail(buffer)==0){
+                strncpy(pBuffer,buffer,limite);
+                retorno=0;
+                break;
+            }else
+                printf("\n%s",msjError);
+        }while(reintentos>=0);
+    }
+    return retorno;
+}
+
+static int verificarMail(char *arreglo)
+{
+    int i=0;
+    int retorno;
+    char bufferAuxiliar=arreglo[i];
+    int contadorPuntos=0;
+    int contadorArrobas=0;
+
+    while(bufferAuxiliar!='\0')
+        {
+            if(bufferAuxiliar=='@')
+                {
+                    contadorArrobas++;
+                }
+            if(bufferAuxiliar=='.')
+                {
+                    contadorPuntos++;
+                }
+                i++;
+                bufferAuxiliar=arreglo[i];
+        }
+        if(contadorArrobas==1 && contadorPuntos>=1)
+            {
+                retorno=0;
+            }
+            else{retorno=-1;}
+
+ return retorno;
+}

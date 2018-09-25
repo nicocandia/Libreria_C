@@ -35,4 +35,6 @@ int getInt(int* pBuffer);
 
 int utn_getLetras(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
 
+int utn_getMail(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
+
 #endif // FUNCIONES_H_INCLUDED
