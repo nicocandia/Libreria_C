@@ -195,13 +195,13 @@ int verificarArreglosoloFlotantes(char* pBuffer)
 int verificarArregloSoloLetras(char *pArreglo)
 {
     int i=0;
-    int retorno=1;
+    int retorno=0;
     char auxiliar=pArreglo[i];
     while(auxiliar!= '\0')
     {
         if((auxiliar!=' ')&&(auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' ))
             {
-                retorno=0;
+                retorno=-1;
                 break;
             }
             i++;
@@ -344,7 +344,8 @@ int utn_getLetras(char *pBuffer,int limite,int reintentos,char* msj,char*msjErro
         do{
             reintentos--;
             printf("\n%s",msj);
-            if(getString(buffer,limite)==0 && isLetras(buffer)==0){
+            if(getString(buffer,limite)==0 && isLetras(buffer)==0)
+            {
                 strncpy(pBuffer,buffer,limite);
                 retorno=0;
                 break;
@@ -420,4 +421,49 @@ static int verificarMail(char *arreglo)
             else{retorno=-1;}
 
  return retorno;
+}
+int verificarCuitoCuil(char*arreglo)
+{
+    int retorno;
+    int i=0;
+    int contadorGuion=0;
+    char auxiliar=arreglo[i];
+    while(auxiliar!='\0')
+        {
+            if(!((auxiliar>='0' && auxiliar<='9')|| auxiliar=='-'))
+                {
+                    retorno=-1;
+                    break;
+                }
+                 if(auxiliar=='-')
+                    {
+                        contadorGuion++;
+                    }
+                i++;
+                auxiliar=arreglo[i];
+            }
+    if(contadorGuion==2 && arreglo[0]>='0' && arreglo[1]>=0 && arreglo[2]=='-' && arreglo[12]>=0 && arreglo[11]=='-')
+        {
+            retorno=0;
+        }
+    return retorno;
+}
+
+int utn_getCuiloCuit(char *pBuffer,int limite,int reintentos,char* msj,char*msjError)
+{
+    int retorno=-1;
+    char buffer[limite];
+    if(pBuffer!=NULL && limite >0 && reintentos >=0){
+        do{
+            reintentos--;
+            printf("\n%s",msj);
+            if(getString(buffer,limite)==0 && verificarCuitoCuil(buffer)==0){
+                strncpy(pBuffer,buffer,limite);
+                retorno=0;
+                break;
+            }else
+                printf("\n%s",msjError);
+        }while(reintentos>=0);
+    }
+    return retorno;
 }

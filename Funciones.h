@@ -37,4 +37,8 @@ int utn_getLetras(char *pBuffer,int limite,int reintentos,char* msj,char*msjErro
 
 int utn_getMail(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
 
+int verificarCuitoCuil(char*arreglo);
+
+int utn_getCuiloCuit(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
+
 #endif // FUNCIONES_H_INCLUDED

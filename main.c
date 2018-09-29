@@ -2,15 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Funciones.h"
-#define tamanio 50
+#define TAMANIO_cuit 13
 int main()
 {
-    char email[tamanio];
+    char cuitoCuil[TAMANIO_cuit];
 
-    if(utn_getMail(email,tamanio,3,"\ningrese direccion de mail\n","direccion de mail no valida\n")==0)
+    if(utn_getCuiloCuit(cuitoCuil,TAMANIO_cuit,3,"\nIngrese cuit o cuil\n","\nerror,cuit no valido")==0)
         {
-            printf("\nCorrecto\n");
-        }
-        else{printf("\nNo se pudo cargar mail\n");}
+            printf("\ncuit valido\n");
+        }else {printf("\ncuit no valido\n");}
     return 0;
 }
