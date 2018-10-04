@@ -29,6 +29,10 @@ int verificarArreglosoloFlotantes(char* pBuffer);
 
 int getFloat(float* pBuffer);
 
+int verificarNumeroCelular(char *pArreglo);
+
+int utn_getNumerocelular(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
+
 int verificarArregloSoloNumeros(char *pArreglo);
 
 int getInt(int* pBuffer);
@@ -40,5 +44,9 @@ int utn_getMail(char *pBuffer,int limite,int reintentos,char* msj,char*msjError)
 int verificarCuitoCuil(char*arreglo);
 
 int utn_getCuiloCuit(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
+
+int utn_getPassword(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
+
+int utn_getNumeroTelefono(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
 
 #endif // FUNCIONES_H_INCLUDED

@@ -213,13 +213,14 @@ int verificarArregloSoloLetras(char *pArreglo)
 int verificarArregloAlfanumerica(char *pArreglo)
 {
     int i=0;
-    int retorno=1;
+    int retorno=0;
     char auxiliar=pArreglo[i];
-    while(auxiliar!= '\0')
+    while(auxiliar!= 0)
     {
-        if((auxiliar==' ')&&(auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' )&&(auxiliar<'0'|| auxiliar>'9'))
+
+     if(!((auxiliar>=48 && auxiliar<=57) || (auxiliar>=65 && auxiliar<=90)||(auxiliar>=97 && auxiliar<=122)))
             {
-                retorno=0;
+                retorno=-1;
                 break;
             }
             i++;
@@ -232,30 +233,30 @@ int verificarNumeroTelefono(char *pArreglo)
 {
     int i=0;
     int retorno;
+    int contadorDigito=0;
     int contarGuion=0;;
     char auxiliar=pArreglo[i];
     while(auxiliar!= '\0')
     {
-        if((auxiliar==' ')&&(auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' )&&(auxiliar<'0'|| auxiliar>'9'))
+        if(!((auxiliar>=48 && auxiliar<=57)|| auxiliar==45))
             {
-                retorno=0;
+                retorno=-1;
                 break;
             }
+        else{contadorDigito++;}
         if(auxiliar=='-')
             {
                 contarGuion++;
             }
-        if(contarGuion==1)
-            {
-                retorno=1;
-            }
-        else
-            {
-                retorno=0;
-            }
             i++;
             auxiliar=pArreglo[i];
     }
+
+     if(contarGuion==1 && pArreglo[4]=='-' && contadorDigito==9)
+            {
+                retorno=0;
+            }
+    else {retorno =-1;}
     return retorno;
 }
 int verificarArregloSoloNumeros(char *pArreglo)
@@ -465,5 +466,94 @@ int utn_getCuiloCuit(char *pBuffer,int limite,int reintentos,char* msj,char*msjE
                 printf("\n%s",msjError);
         }while(reintentos>=0);
     }
+    return retorno;
+}
+
+int utn_getPassword(char *pBuffer,int limite,int reintentos,char* msj,char*msjError){
+
+    int retorno=-1;
+    char buffer[limite];
+    if(pBuffer!=NULL && limite >0 && reintentos >=0){
+        do{
+            reintentos--;
+            printf("\n%s",msj);
+            if(getString(buffer,limite)==0 && verificarArregloAlfanumerica(buffer)==0){
+                strncpy(pBuffer,buffer,limite);
+                retorno=0;
+                break;
+            }else
+                printf("\n%s",msjError);
+        }while(reintentos>=0);
+    }
+    return retorno;
+}
+
+int utn_getNumeroTelefono(char *pBuffer,int limite,int reintentos,char* msj,char*msjError){
+
+    int retorno=-1;
+    char buffer[limite];
+    if(pBuffer!=NULL && limite >0 && reintentos >=0){
+        do{
+            reintentos--;
+            printf("\n%s",msj);
+            if(getString(buffer,limite)==0 && verificarNumeroTelefono(buffer)==0){
+                strncpy(pBuffer,buffer,limite);
+                retorno=0;
+                break;
+            }else
+                printf("\n%s",msjError);
+        }while(reintentos>=0);
+    }
+    return retorno;
+}
+
+int utn_getNumerocelular(char *pBuffer,int limite,int reintentos,char* msj,char*msjError){
+
+    int retorno=-1;
+    char buffer[limite];
+    if(pBuffer!=NULL && limite >0 && reintentos >=0){
+        do{
+            reintentos--;
+            printf("\n%s",msj);
+            if(getString(buffer,limite)==0 && verificarNumeroCelular(buffer)==0){
+                strncpy(pBuffer,buffer,limite);
+                retorno=0;
+                break;
+            }else
+                printf("\n%s",msjError);
+        }while(reintentos>=0);
+    }
+    return retorno;
+}
+
+int verificarNumeroCelular(char *pArreglo)
+{
+    int i=0;
+    int retorno;
+    int contadorDigitos=0;
+    int contarGuion=0;
+    char auxiliar=pArreglo[i];
+    while(auxiliar!= '\0')
+    {
+        if(!((auxiliar>=48 && auxiliar<=57)|| auxiliar==45))
+            {
+                retorno=-1;
+                break;
+            }
+        else{contadorDigitos++;}
+
+        if(auxiliar=='-' )
+            {
+                contarGuion++;
+            }
+            i++;
+            auxiliar=pArreglo[i];
+    }
+
+     if(contarGuion==1 && pArreglo[2]=='-' && contadorDigitos==11154)
+            {
+                retorno=0;
+            }
+    else {retorno =-1;}
     return retorno;
 }

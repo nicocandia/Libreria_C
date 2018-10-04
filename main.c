@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Funciones.h"
-#define TAMANIO_cuit 13
 int main()
 {
-    char cuitoCuil[TAMANIO_cuit];
+    char numerotelefono [50];
 
-    if(utn_getCuiloCuit(cuitoCuil,TAMANIO_cuit,3,"\nIngrese cuit o cuil\n","\nerror,cuit no valido")==0)
+    if(utn_getNumeroTelefono(numerotelefono,50,3,"\nIngrese numero telefono\n","\nerror numero de telefono no valido\n")==0)
         {
-            printf("\ncuit valido\n");
-        }else {printf("\ncuit no valido\n");}
+            printf("\nnumero de telefono: %s \n",numerotelefono);
+        }
+
     return 0;
 }
