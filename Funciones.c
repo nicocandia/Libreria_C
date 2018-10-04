@@ -550,7 +550,7 @@ int verificarNumeroCelular(char *pArreglo)
             auxiliar=pArreglo[i];
     }
 
-     if(contarGuion==1 && pArreglo[2]=='-' && contadorDigitos==11154)
+     if(contarGuion==1 && pArreglo[2]=='-' && contadorDigitos==11)
             {
                 retorno=0;
             }
